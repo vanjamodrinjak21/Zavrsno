@@ -16,6 +16,10 @@ module.exports = {
         maxPoolSize: 10,
         minPoolSize: 2,
         family: 4,
+        ssl: true,
+        tls: true,
+        tlsAllowInvalidCertificates: true,
+        tlsAllowInvalidHostnames: true,
         retryWrites: true,
         w: 'majority'
     }
