@@ -10,8 +10,11 @@ module.exports = {
     options: {
         serverApi: {
             version: '1',
-            strict: true,
-            deprecationErrors: true
-        }
+            strict: false,
+            deprecationErrors: false
+        },
+        maxPoolSize: 10,
+        minPoolSize: 2,
+        tlsInsecure: true
     }
 }; 
