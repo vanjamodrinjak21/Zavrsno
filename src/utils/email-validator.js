@@ -1,55 +1,37 @@
-// List of valid email domains with their providers
-const validDomains = {
-    // Croatian providers
-    't.ht.hr': true,
-    'gmail.hr': true,
-    'yahoo.hr': true,
-    'inet.hr': true,
-    'xnet.hr': true,
-    'vip.hr': true,
-    'zagreb.hr': true,
-    'net.hr': true,
-    'zg.hr': true,
-    'hr': true,
-    'tel.hr': true,
-    'vz.hr': true,
-    'os.hr': true,
-    'ri.hr': true,
-    'optinet.hr': true,
-    'globalnet.hr': true,
-    'gmail.com': true,  // Keep gmail.com as it's commonly used
+/**
+ * Simple email validation function
+ * @param {string} email - The email to validate
+ * @returns {boolean} - Whether the email is valid
+ */
+function validateEmail(email) {
+    if (!email) return false;
     
-    // Academic/Business
-    'fer.hr': true,
-    'pmf.hr': true,
-    'ffzg.hr': true,
-    'unizg.hr': true,
-    'efzg.hr': true,
-    'fsb.hr': true,
-    'pravo.hr': true,
-    'unin.hr': true,
-    
-    // Add more Croatian domains as needed
-};
-
-function isValidEmailDomain(email) {
     try {
-        // Extract the domain part after @
-        const domainPart = email.split('@')[1];
-        if (!domainPart) return false;
-
-        // Check if the exact domain is in our valid domains list
-        return validDomains[domainPart] === true;
-
+        const parts = email.split('@');
+        if (parts.length !== 2) return false;
+        
+        const [localPart, domain] = parts;
+        if (!localPart || !domain) return false;
+        
+        return true;
     } catch (error) {
         console.error('Email validation error:', error);
         return false;
     }
 }
 
-// Function to get list of valid domains (for frontend display)
-function getValidDomains() {
-    return Object.keys(validDomains);
+/**
+ * Extract email provider from email
+ * @param {string} email - The email to extract provider from
+ * @returns {string} - The email provider
+ */
+function getEmailProvider(email) {
+    try {
+        return email.split('@')[1].split('.')[0];
+    } catch (error) {
+        console.error('Error extracting email provider:', error);
+        return '';
+    }
 }
 
-module.exports = { isValidEmailDomain, getValidDomains }; 
+module.exports = { validateEmail, getEmailProvider }; 

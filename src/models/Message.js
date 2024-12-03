@@ -30,26 +30,8 @@ const messageSchema = new mongoose.Schema({
 }, { 
     collection: 'FORMA',
     versionKey: false,
-    timestamps: false,
-    toJSON: { getters: true }
+    timestamps: false
 });
-
-// Add compound index to prevent duplicate messages
-messageSchema.index(
-    { 
-        e_mail: 1, 
-        Poruka: 1,
-        timestamp: 1 
-    }, 
-    { 
-        unique: true,
-        partialFilterExpression: {
-            timestamp: {
-                $gt: new Date(Date.now() - 60 * 60 * 1000)
-            }
-        }
-    }
-);
 
 // Pre-save middleware
 messageSchema.pre('save', function(next) {

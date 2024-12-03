@@ -10,12 +10,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // CORS configuration for production
-app.use(cors({
-    origin: ['https://kratkimetar.com', 'http://kratkimetar.com', 'http://localhost:3000'],
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type'],
-    credentials: true
-}));
+app.use(cors());
 
 // Body parsing middleware
 app.use(express.json());
@@ -24,47 +19,18 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from public directory
 app.use(express.static('public'));
 
-// MongoDB connection with retry logic
+// MongoDB connection
 const connectDB = async () => {
-    let retries = 5;
-    while (retries) {
-        try {
-            await mongoose.connect(dbConfig.mongoURI, {
-                ...dbConfig.options,
-                bufferCommands: false,
-                autoIndex: true,
-                connectTimeoutMS: 10000,
-            });
-            
-            console.log('Connected to MongoDB Atlas');
-            
-            mongoose.connection.on('error', err => {
-                console.error('MongoDB connection error:', err);
-                if (err.name === 'MongoNetworkError') {
-                    console.log('Attempting to reconnect to MongoDB...');
-                    setTimeout(connectDB, 5000);
-                }
-            });
-
-            mongoose.connection.on('disconnected', () => {
-                console.log('MongoDB disconnected. Attempting to reconnect...');
-                setTimeout(connectDB, 5000);
-            });
-
-            return; // Successfully connected
-        } catch (err) {
-            console.error(`Failed to connect to MongoDB (${retries} retries left):`, err);
-            retries -= 1;
-            if (retries === 0) {
-                throw new Error('Failed to connect to MongoDB after multiple retries');
-            }
-            // Wait for 5 seconds before retrying
-            await new Promise(resolve => setTimeout(resolve, 5000));
-        }
+    try {
+        await mongoose.connect(dbConfig.mongoURI, dbConfig.options);
+        console.log('Connected to MongoDB Atlas');
+    } catch (err) {
+        console.error('MongoDB connection error:', err);
+        process.exit(1);
     }
 };
 
-// Start server only after MongoDB connection is established
+// Start server
 const startServer = async () => {
     try {
         await connectDB();
@@ -87,7 +53,7 @@ const startServer = async () => {
         });
 
         // Start server
-        app.listen(port, '0.0.0.0', () => {
+        app.listen(port, () => {
             console.log(`Server is running on port ${port}`);
         });
     } catch (err) {
@@ -95,5 +61,23 @@ const startServer = async () => {
         process.exit(1);
     }
 };
+
+// Handle MongoDB connection errors
+mongoose.connection.on('error', err => {
+    console.error('MongoDB connection error:', err);
+});
+
+mongoose.connection.on('disconnected', () => {
+    console.log('MongoDB disconnected');
+});
+
+process.on('SIGINT', async () => {
+    try {
+        await mongoose.connection.close();
+        process.exit(0);
+    } catch (err) {
+        process.exit(1);
+    }
+});
 
 startServer(); 

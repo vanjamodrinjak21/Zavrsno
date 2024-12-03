@@ -1,38 +1,43 @@
 const mongoose = require('mongoose');
 const dbConfig = require('../../config/database');
 
-// Connect to MongoDB (use a separate connection for NAMES)
+// Connect to MongoDB
 const namesDB = mongoose.createConnection(dbConfig.mongoURI, dbConfig.options);
 
-// Simple Name Schema
+// Name Schema
 const nameSchema = new mongoose.Schema({
-    name: {
+    Ime: {
         type: String,
         required: true,
-        unique: true,
         trim: true
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now
     }
 }, { 
-    collection: 'NAMES',
+    collection: 'IMENA',
     versionKey: false
 });
 
-const Name = namesDB.model('NAMES', nameSchema);
+const Name = namesDB.model('IMENA', nameSchema);
 
 // Function to store name
 async function storeName(name) {
     try {
         const cleanName = name.trim();
-        if (cleanName) {
-            await Name.findOneAndUpdate(
-                { name: cleanName },
-                { name: cleanName },
-                { upsert: true }
-            );
-        }
+        
+        await Name.findOneAndUpdate(
+            { Ime: cleanName },
+            { 
+                Ime: cleanName,
+                timestamp: new Date()
+            },
+            { upsert: true }
+        );
     } catch (error) {
         console.error('Error storing name:', error);
     }
 }
 
-module.exports = { storeName, Name }; 
+module.exports = { storeName, Name };

@@ -1,17 +1,26 @@
 const mongoose = require('mongoose');
 const dbConfig = require('../../config/database');
 
-// Connect to MongoDB (use a separate connection for EMAILS)
+// Connect to MongoDB
 const emailsDB = mongoose.createConnection(dbConfig.mongoURI, dbConfig.options);
 
-// Simple Email Schema
+// Email Schema
 const emailSchema = new mongoose.Schema({
-    email: {
+    e_mail: {
         type: String,
         required: true,
         unique: true,
         trim: true,
         lowercase: true
+    },
+    e_mail_provider: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now
     }
 }, { 
     collection: 'EMAILS',
@@ -24,9 +33,15 @@ const Email = emailsDB.model('EMAILS', emailSchema);
 async function storeEmail(email) {
     try {
         const cleanEmail = email.toLowerCase().trim();
+        const emailProvider = cleanEmail.split('@')[1].split('.')[0];
+        
         await Email.findOneAndUpdate(
-            { email: cleanEmail },
-            { email: cleanEmail },
+            { e_mail: cleanEmail },
+            { 
+                e_mail: cleanEmail,
+                e_mail_provider: emailProvider,
+                timestamp: new Date()
+            },
             { upsert: true }
         );
     } catch (error) {
