@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Title - Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+    <div class="project-page">
+        <!-- Close Button -->
+        <a href="../index.html" class="project-close">&times;</a>
+
+        <!-- Project Hero -->
+        <div class="project-hero">
+            <img src="" alt="" class="hero-image">
+            <div class="project-hero-content">
+                <span class="project-category"></span>
+                <h1 class="project-title"></h1>
+            </div>
+        </div>
+
+        <!-- Project Content -->
+        <div class="project-content">
+            <div class="project-main">
+                <div class="project-description">
+                    <h2>Project Overview</h2>
+                    <p class="project-overview"></p>
+                </div>
+
+                <div class="project-details-grid">
+                    <div class="detail-item">
+                        <h3>Client</h3>
+                        <p class="project-client"></p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Date</h3>
+                        <p class="project-date"></p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Services</h3>
+                        <p class="project-services"></p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Location</h3>
+                        <p class="project-location"></p>
+                    </div>
+                </div>
+
+                <div class="project-gallery">
+                    <!-- Gallery items will be added dynamically -->
+                </div>
+
+                <!-- Project Navigation -->
+                <div class="project-navigation">
+                    <a href="" class="prev-project">
+                        <span>Previous Project</span>
+                        <h4 class="prev-title"></h4>
+                    </a>
+                    <a href="" class="next-project">
+                        <span>Next Project</span>
+                        <h4 class="next-title"></h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Footer -->
+        <footer class="project-footer">
+            <p>© 2023 <a href="../index.html">Kratki Metar</a></p>
+        </footer>
+    </div>
+
+    <script src="../script.js"></script>
+    <script>
+        // Get project ID from URL
+        const projectId = window.location.pathname.split('/').pop().replace('.html', '');
+        const project = projectData[projectId];
+
+        if (project) {
+            // Update page content
+            document.title = `${project.title} - Portfolio`;
+            document.querySelector('.project-category').textContent = project.category;
+            document.querySelector('.project-title').textContent = project.title;
+            document.querySelector('.hero-image').src = project.heroImage;
+            document.querySelector('.hero-image').alt = project.title;
+            document.querySelector('.project-overview').textContent = project.overview;
+            document.querySelector('.project-client').textContent = project.client;
+            document.querySelector('.project-date').textContent = project.date;
+            document.querySelector('.project-services').textContent = project.services;
+            document.querySelector('.project-location').textContent = project.location;
+
+            // Update gallery
+            const galleryContainer = document.querySelector('.project-gallery');
+            project.gallery.forEach(image => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = project.title;
+                galleryItem.appendChild(img);
+                galleryContainer.appendChild(galleryItem);
+            });
+
+            // Update navigation
+            const prevProject = projectData[project.prev];
+            const nextProject = projectData[project.next];
+
+            const prevLink = document.querySelector('.prev-project');
+            const nextLink = document.querySelector('.next-project');
+
+            prevLink.href = `./${project.prev}.html`;
+            nextLink.href = `./${project.next}.html`;
+
+            document.querySelector('.prev-title').textContent = prevProject.title;
+            document.querySelector('.next-title').textContent = nextProject.title;
+        }
+    </script>
+</body>
+</html> 

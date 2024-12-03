@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: kratki-metar
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        value: mongodb+srv://momentforthephotographer:102UALNrK@contactform.wuj5g.mongodb.net/?retryWrites=true&w=majority&appName=ContactForm
+    staticPublishPath: ./public
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html 
