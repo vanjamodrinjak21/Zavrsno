@@ -8,10 +8,15 @@ if (!MONGODB_URI) {
 module.exports = {
     mongoURI: MONGODB_URI,
     options: {
-        serverSelectionTimeoutMS: 10000,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000,
         socketTimeoutMS: 45000,
+        connectTimeoutMS: 10000,
         maxPoolSize: 10,
         minPoolSize: 2,
-        family: 4
+        family: 4,
+        retryWrites: true,
+        w: 'majority'
     }
 }; 
