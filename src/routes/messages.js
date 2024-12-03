@@ -3,6 +3,8 @@ const router = express.Router();
 const Message = require('../models/Message');
 const { storeEmail } = require('../utils/email-storage');
 const { storeName } = require('../utils/name-storage');
+const { validateEmail } = require('../utils/email-validator');
+const { validateName } = require('../utils/name-validator');
 
 // Message submission route
 router.post('/send-message', async (req, res) => {
@@ -21,6 +23,29 @@ router.post('/send-message', async (req, res) => {
         const cleanEmail = email.toLowerCase().trim();
         const cleanName = name.trim();
         const cleanMessage = message.trim();
+
+        // Validate inputs
+        if (!validateEmail(cleanEmail)) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Invalid email format'
+            });
+        }
+
+        if (!validateName(cleanName)) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Name must be at least 2 characters long'
+            });
+        }
+
+        if (cleanMessage.length > 500) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Message is too long (max 500 characters)'
+            });
+        }
+
         const emailProvider = cleanEmail.split('@')[1].split('.')[0];
 
         // Create new message
@@ -49,6 +74,22 @@ router.post('/send-message', async (req, res) => {
 
     } catch (error) {
         console.error('Server error:', error);
+        
+        // Handle specific MongoDB errors
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Invalid data format'
+            });
+        }
+        
+        if (error.name === 'MongoServerError') {
+            return res.status(500).json({
+                status: 'error',
+                message: 'Database error, please try again'
+            });
+        }
+
         return res.status(500).json({
             status: 'error',
             message: 'An error occurred while processing your message'

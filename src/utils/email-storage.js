@@ -9,7 +9,6 @@ const emailSchema = new mongoose.Schema({
     e_mail: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
         lowercase: true
     },
@@ -32,6 +31,8 @@ const Email = emailsDB.model('EMAILS', emailSchema);
 // Function to store email
 async function storeEmail(email) {
     try {
+        if (!email) throw new Error('Email is required');
+        
         const cleanEmail = email.toLowerCase().trim();
         const emailProvider = cleanEmail.split('@')[1].split('.')[0];
         
@@ -46,6 +47,7 @@ async function storeEmail(email) {
         );
     } catch (error) {
         console.error('Error storing email:', error);
+        throw error; // Re-throw to handle in the route
     }
 }
 
