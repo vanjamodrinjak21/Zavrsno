@@ -1,20 +1,16 @@
 require('dotenv').config();
 
-const MONGODB_URI = process.env.MONGODB_URI;
-if (!MONGODB_URI) {
-    throw new Error('Please define the MONGODB_URI environment variable');
+const mongoURI = 'mongodb+srv://momentforthephotographer:102UALNrK@contactform.wuj5g.mongodb.net/?retryWrites=true&w=majority&appName=ContactForm';
+
+if (typeof mongoURI !== 'string') {
+    throw new Error('MongoDB URI must be a string');
 }
 
 module.exports = {
-    mongoURI: MONGODB_URI,
+    url: mongoURI,
     options: {
-        serverApi: {
-            version: '1',
-            strict: false,
-            deprecationErrors: false
-        },
-        maxPoolSize: 10,
-        minPoolSize: 2,
-        tlsInsecure: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        dbName: 'ContactForm'
     }
-}; 
+};
