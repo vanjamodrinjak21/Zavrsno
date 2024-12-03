@@ -7,5 +7,16 @@ if (!MONGODB_URI) {
 
 module.exports = {
     mongoURI: MONGODB_URI,
-    options: {}
+    options: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 45000,
+        family: 4, // Use IPv4, skip trying IPv6
+        maxPoolSize: 10,
+        minPoolSize: 2,
+        maxIdleTimeMS: 30000,
+        retryWrites: true,
+        w: 'majority'
+    }
 }; 
