@@ -50,10 +50,14 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.disabled = true;
             
             try {
+                // Get current timestamp
+                const now = new Date().toISOString();
+                
                 const formData = {
                     name: contactForm.querySelector('[name="name"]').value.trim(),
                     email: contactForm.querySelector('[name="email"]').value.trim(),
-                    message: contactForm.querySelector('[name="message"]').value.trim()
+                    message: contactForm.querySelector('[name="message"]').value.trim(),
+                    createdAt: now
                 };
 
                 console.log('Sending data:', formData);
@@ -74,6 +78,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Server response:', result);
 
                 if (result.status === 'success') {
+                    // Display success message with the saved data
+                    const savedData = result.data;
+                    console.log('Saved contact:', savedData);
+                    
                     thankYouMessage.classList.add('active');
                     contactForm.reset();
                     if (charCounter) charCounter.textContent = '0/500';
