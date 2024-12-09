@@ -33,6 +33,17 @@ const messageSchema = new mongoose.Schema({
     timestamps: false
 });
 
+// Create a compound index for duplicate message detection
+messageSchema.index({ 
+    e_mail: 1, 
+    Poruka: 1, 
+    timestamp: 1 
+}, { 
+    unique: true,
+    // Allow messages with the same content after 1 minute
+    expireAfterSeconds: 60
+});
+
 // Pre-save middleware
 messageSchema.pre('save', function(next) {
     if (this.e_mail) {

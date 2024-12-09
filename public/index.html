@@ -6,127 +6,148 @@
     <meta name="theme-color" content="#000000">
     <title>Kratki Metar</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preload" as="image" href="assets/home-bg.jpg">
     <link rel="shortcut icon" href="assets/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar">
-        <div class="brand">
-            <a href="#home">
-                <img src="assets/logo.png" alt="Kratki Metar">
-            </a>
-        </div>
-        
-        <div class="menu-toggle">
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="brand">
+                <a href="#home">
+                    <img src="assets/logo.png" alt="Kratki Metar">
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="#home" data-nav="home">POČETNA</a></li>
+                    <li><a href="#about" data-nav="about">O NAMA</a></li>
+                    <li><a href="#projects" data-nav="projects">PROJEKTI</a></li>
+                    <li><a href="#contact" data-nav="contact">KONTAKT</a></li>
+                </ul>
+                <div class="language-switcher">
+                    <button class="language-btn en-btn" data-lang="en">EN</button>
+                    <button class="language-btn hr-btn active" data-lang="hr">HR</button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="menu-wrap">
+                <input type="checkbox" class="toggler">
+                <div class="hamburger"><div></div></div>
+                <div class="menu">
+                    <div>
+                        <div>
+                            <ul>
+                                <li><a href="#home" data-nav="home">POČETNA</a></li>
+                                <li><a href="#about" data-nav="about">O NAMA</a></li>
+                                <li><a href="#projects" data-nav="projects">PROJEKTI</a></li>
+                                <li><a href="#contact" data-nav="contact">KONTAKT</a></li>
+                            </ul>
+                            <div class="language-switcher">
+                                <button class="language-btn en-btn" data-lang="en">EN</button>
+                                <button class="language-btn hr-btn active" data-lang="hr">HR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <ul class="nav-menu">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
     </nav>
 
     <section id="home">
         <div class="hero-text">
-            <h1>KRATKI<span class="highlight">METAR</span></h1>
-            <p>Passion for short movies!</p>
-            <button class="learn-more-btn">LEARN MORE</button>
+            <h1>
+                <span class="first-line">KRATKI</span>
+                <span class="second-line">METAR</span>
+            </h1>
+            <p data-i18n="hero.tagline">Passion for short movies!</p>
+            <a href="#about" class="learn-more-btn" data-i18n="hero.learnMore">LEARN MORE</a>
         </div>
     </section>
 
     <section id="about">
         <div class="about-container">
-            <h2>ABOUT US</h2>
+            <h2 data-i18n="about.title">ABOUT US</h2>
             <div class="about-text">
-                <p>We, at production 'Kratki metar' are dedicated to creating unique and engaging short films. Our vision is to create a growing community of film enthusiasts and creators. Our mission is to provide our audience with simple yet creative and innovative perspective of short movies.</p>
+                <p data-i18n="about.description">We, at production 'Kratki metar' are dedicated to creating unique and engaging short films. Our vision is to create a growing community of film enthusiasts and creators. Our mission is to provide our audience with simple yet creative and innovative perspective of short movies.</p>
             </div>
         </div>
     </section>
 
     <section id="projects">
-        <h2>OUR PROJECTS</h2>
+        <h2 data-i18n="projects.title">OUR PROJECTS</h2>
+        <div class="project-filters">
+            <button class="filter-btn active" data-filter="all" data-i18n="filters.all">ALL</button>
+            <button class="filter-btn" data-filter="documentary" data-i18n="filters.documentary">DOCUMENTARY</button>
+            <button class="filter-btn" data-filter="cinematography" data-i18n="filters.cinematography">CINEMATOGRAPHY</button>
+            <button class="filter-btn" data-filter="film-production" data-i18n="filters.filmProduction">FILM PRODUCTION</button>
+            <button class="filter-btn" data-filter="workshop" data-i18n="filters.workshop">WORKSHOP</button>
+        </div>
         <div class="projects-grid">
-            <div class="project-item large">
+            <div class="project-item large" data-category="documentary">
                 <a href="projects/urban-stories.html">
                     <div class="project-image">
                         <img src="https://images.pexels.com/photos/3945317/pexels-photo-3945317.jpeg" alt="Professional camera closeup">
                         <div class="project-overlay">
                             <div class="project-info">
-                                <span class="project-type">DOCUMENTARY</span>
-                                <h3 class="project-title">Urban Stories</h3>
+                                <span class="project-type" data-i18n="filters.documentary">DOCUMENTARY</span>
+                                <h3 class="project-title" data-i18n="projects.items.urbanStories.title">Urban Stories</h3>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="project-item">
+            <div class="project-item" data-category="cinematography">
                 <a href="projects/light-and-shadow.html">
                     <div class="project-image">
                         <img src="https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg" alt="Light and shadow study">
                         <div class="project-overlay">
                             <div class="project-info">
-                                <span class="project-type">CINEMATOGRAPHY</span>
-                                <h3 class="project-title">Light & Shadow</h3>
+                                <span class="project-type" data-i18n="filters.cinematography">CINEMATOGRAPHY</span>
+                                <h3 class="project-title" data-i18n="projects.items.lightAndShadow.title">Light & Shadow</h3>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="project-item">
+            <div class="project-item" data-category="film-production">
                 <a href="projects/behind-the-scenes.html">
                     <div class="project-image">
-                        <img src="https://images.pexels.com/photos/3062541/pexels-photo-3062541.jpeg" alt="Film production setup">
+                        <img src="https://images.pexels.com/photos/2873486/pexels-photo-2873486.jpeg" alt="Behind the scenes">
                         <div class="project-overlay">
                             <div class="project-info">
-                                <span class="project-type">FILM PRODUCTION</span>
-                                <h3 class="project-title">Behind the Scenes</h3>
+                                <span class="project-type" data-i18n="filters.filmProduction">FILM PRODUCTION</span>
+                                <h3 class="project-title" data-i18n="projects.items.behindTheScenes.title">Behind the Scenes</h3>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="project-item">
-                <a href="projects/urban-motion.html">
+            <div class="project-item" data-category="workshop">
+                <a href="projects/film-academy.html">
                     <div class="project-image">
-                        <img src="https://images.pexels.com/photos/1707820/pexels-photo-1707820.jpeg" alt="Urban motion and lights">
+                        <img src="https://images.pexels.com/photos/3379934/pexels-photo-3379934.jpeg" alt="Workshop">
                         <div class="project-overlay">
                             <div class="project-info">
-                                <span class="project-type">CINEMATOGRAPHY</span>
-                                <h3 class="project-title">Urban Motion</h3>
+                                <span class="project-type" data-i18n="filters.workshop">WORKSHOP</span>
+                                <h3 class="project-title" data-i18n="projects.items.filmAcademy.title">Film Academy</h3>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="project-item large">
-                <a href="projects/film-academy.html">
-                    <div class="project-image">
-                        <img src="https://images.pexels.com/photos/3379934/pexels-photo-3379934.jpeg" alt="Workshop">
-                        <div class="project-overlay">
-                            <div class="project-info">
-                                <span class="project-type">WORKSHOP</span>
-                                <h3 class="project-title">Film Academy</h3>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="project-item">
                 <a href="projects/city-lights.html">
                     <div class="project-image">
                         <img src="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg" alt="Film Production">
                         <div class="project-overlay">
                             <div class="project-info">
-                                <span class="project-type">FILM PRODUCTION</span>
-                                <h3 class="project-title">City Lights</h3>
+                                <span class="project-type" data-i18n="projects.types.filmProduction">FILM PRODUCTION</span>
+                                <h3 class="project-title" data-i18n="projects.items.cityLights.title">City Lights</h3>
                             </div>
                         </div>
                     </div>
@@ -138,8 +159,8 @@
                         <img src="https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg" alt="Documentary">
                         <div class="project-overlay">
                             <div class="project-info">
-                                <span class="project-type">DOCUMENTARY</span>
-                                <h3 class="project-title">Street Culture</h3>
+                                <span class="project-type" data-i18n="projects.types.documentary">DOCUMENTARY</span>
+                                <h3 class="project-title" data-i18n="projects.items.streetCulture.title">Street Culture</h3>
                             </div>
                         </div>
                     </div>
@@ -151,8 +172,8 @@
                         <img src="https://images.pexels.com/photos/3062545/pexels-photo-3062545.jpeg" alt="Film Production">
                         <div class="project-overlay">
                             <div class="project-info">
-                                <span class="project-type">FILM PRODUCTION</span>
-                                <h3 class="project-title">Night Scenes</h3>
+                                <span class="project-type" data-i18n="projects.types.filmProduction">FILM PRODUCTION</span>
+                                <h3 class="project-title" data-i18n="projects.items.nightScenes.title">Night Scenes</h3>
                             </div>
                         </div>
                     </div>
@@ -164,8 +185,8 @@
                         <img src="https://images.pexels.com/photos/2346594/pexels-photo-2346594.jpeg" alt="Documentary">
                         <div class="project-overlay">
                             <div class="project-info">
-                                <span class="project-type">DOCUMENTARY</span>
-                                <h3 class="project-title">Urban Life</h3>
+                                <span class="project-type" data-i18n="projects.types.documentary">DOCUMENTARY</span>
+                                <h3 class="project-title" data-i18n="projects.items.urbanLife.title">Urban Life</h3>
                             </div>
                         </div>
                     </div>
@@ -177,15 +198,15 @@
     <section id="contact">
         <div class="contact-section">
             <div class="contact-info">
-                <h2>Get in Touch</h2>
-                <p>Let's discuss your next project or just say hello!</p>
+                <h2 data-i18n="contact.title">Get in Touch</h2>
+                <p data-i18n="contact.subtitle">Let's discuss your next project or just say hello!</p>
                 <div class="contact-details">
                     <div class="contact-item">
                         <div class="contact-icon">
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="contact-text">
-                            <h4>Email</h4>
+                            <h4 data-i18n="contact.email">Email</h4>
                             <a href="mailto:kratki.metar@gmail.com">kratki.metar@gmail.com</a>
                         </div>
                     </div>
@@ -194,7 +215,7 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="contact-text">
-                            <h4>Address</h4>
+                            <h4 data-i18n="contact.address">Address</h4>
                             <p>Josipa Juraja Strosmayera 12</p>
                             <p>10 0000 Zagreb, Croatia</p>
                         </div>
@@ -204,38 +225,39 @@
                             <i class="fab fa-instagram"></i>
                         </div>
                         <div class="contact-text">
-                            <h4>Social Media</h4>
+                            <h4 data-i18n="contact.social">Social Media</h4>
                             <a href="https://instagram.com/kratki.metar_official" target="_blank" rel="noopener noreferrer">@kratki.metar_official</a>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <form id="contact-form" class="contact-form">
+
+            <form class="contact-form" id="contact-form">
                 <div class="contact-form-header">
-                    <h3>Send us a Message</h3>
-                    <p>Fill out the form below and we'll get back to you shortly.</p>
+                    <h3 data-i18n="contact.form.title">Send us a Message</h3>
+                    <p data-i18n="contact.form.subtitle">Fill out the form below and we'll get back to you shortly.</p>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-input" id="name" name="name" placeholder=" " required>
-                    <label for="name" class="form-label">Your Name</label>
+                    <label for="name" class="form-label" data-i18n="contact.form.name">Your Name</label>
                 </div>
                 <div class="form-group">
                     <input type="email" class="form-input" id="email" name="email" placeholder=" " required>
-                    <label for="email" class="form-label">Your Email</label>
+                    <label for="email" class="form-label" data-i18n="contact.form.email">Your Email</label>
                 </div>
                 <div class="form-group">
                     <textarea class="form-input" id="message" name="message" placeholder=" " required></textarea>
-                    <label for="message" class="form-label">Your Message</label>
-                    <div class="char-counter">0/500</div>
+                    <label for="message" class="form-label" data-i18n="contact.form.message">Your Message</label>
                 </div>
-                <button type="submit" class="submit-btn">Send Message</button>
+                <button type="submit" class="submit-btn" data-i18n="contact.form.submit">Send Message</button>
             </form>
 
-            <div id="thank-you-message" class="thank-you-message">
-                <h3>Thank You!</h3>
-                <p>Your message has been sent successfully.</p>
-                <button class="another-message-btn">Send Another Message</button>
+            <div class="response-message">
+                <div class="response-content">
+                    <h3 data-i18n="contact.thankYou.title">Message Sent!</h3>
+                    <p data-i18n="contact.thankYou.message">Thank you for your message. We'll get back to you soon.</p>
+                    <button class="close-btn" data-i18n="contact.thankYou.sendAnother">Send Another Message</button>
+                </div>
             </div>
         </div>
     </section>
@@ -255,29 +277,35 @@
             </div>
 
             <div class="footer-contact">
-                <h3>Contact</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Josipa Juraja Strosmayera 12</p>
+                <h3 data-i18n="footer.contact.title">Contact</h3>
+                <p><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.contact.address">Address</span></p>
+                <p>Josipa Juraja Strosmayera 12</p>
                 <p>10 0000 Zagreb, Croatia</p>
-                <p><i class="far fa-envelope"></i> <a href="mailto:kratki.metar@gmail.com">kratki.metar@gmail.com</a></p>
-                <p><i class="fab fa-instagram"></i> <a href="https://instagram.com/kratki.metar_official" target="_blank" rel="noopener noreferrer">@kratki.metar_official</a></p>
+                <p><i class="far fa-envelope"></i> <span data-i18n="footer.contact.email">Email</span>: <a href="mailto:kratki.metar@gmail.com">kratki.metar@gmail.com</a></p>
+                <p><i class="fab fa-instagram"></i> <span data-i18n="footer.contact.instagram.title">Social Media</span>: <a href="https://instagram.com/kratki.metar_official" target="_blank" rel="noopener noreferrer" data-i18n="footer.contact.instagram.handle">@kratki.metar_official</a></p>
             </div>
 
             <div class="footer-newsletter">
-                <h3>Newsletter</h3>
-                <p>Stay updated with our latest projects and news.</p>
+                <h3 data-i18n="footer.newsletter.title">Newsletter</h3>
+                <p data-i18n="footer.newsletter.subtitle">Stay updated with our latest projects and news.</p>
                 <form class="newsletter-form" onsubmit="return false;">
-                    <input type="email" placeholder="Your email" aria-label="Email for newsletter">
-                    <button type="submit">Join</button>
+                    <input type="email" data-i18n-placeholder="footer.newsletter.placeholder" aria-label="Email for newsletter">
+                    <button type="submit" data-i18n="footer.newsletter.button">Join</button>
                 </form>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>© <script>document.write(new Date().getFullYear())</script> <a href="#">Kratki Metar</a>. All rights reserved.</p>
+            <p>© <script>document.write(new Date().getFullYear())</script> Kratki Metar. <span data-i18n="footer.rights">All rights reserved.</span></p>
         </div>
     </footer>
 
-    <script src="navigation.js"></script>
+    <!-- Scripts -->
+    <script src="js/translations.js"></script>
+    <script src="js/language-switcher.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="/js/contact-form.js"></script>
     <script src="script.js"></script>
+    <script src="js/projects.js"></script>
 </body>
 </html>

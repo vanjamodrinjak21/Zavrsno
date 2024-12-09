@@ -1,13 +1,13 @@
 require('dotenv').config();
 
-const mongoURI = 'mongodb+srv://momentforthephotographer:102UALNrK@contactform.wuj5g.mongodb.net/?retryWrites=true&w=majority&appName=ContactForm';
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/ContactForm';
 
 if (typeof mongoURI !== 'string') {
     throw new Error('MongoDB URI must be a string');
 }
 
 module.exports = {
-    url: mongoURI,
+    mongoURI,
     options: {
         useNewUrlParser: true,
         useUnifiedTopology: true,
