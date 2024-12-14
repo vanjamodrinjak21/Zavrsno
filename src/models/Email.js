@@ -1,33 +1,21 @@
 const mongoose = require('mongoose');
 
 const emailSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        lowercase: true
-    },
-    provider: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    firstContact: {
-        type: Date,
-        default: Date.now
-    },
-    lastContact: {
-        type: Date,
-        default: Date.now
-    },
-    messageCount: {
-        type: Number,
-        default: 1
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: function(v) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      },
+      message: props => `${props.value} is not a valid email address!`
     }
-}, { 
-    collection: 'EMAILS',
-    versionKey: false
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-module.exports = mongoose.model('Email', emailSchema, 'EMAILS'); 
+module.exports = mongoose.model('Email', emailSchema);

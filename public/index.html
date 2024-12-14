@@ -42,10 +42,10 @@
                     <div>
                         <div>
                             <ul>
-                                <li><a href="#home" data-nav="home">POČETNA</a></li>
-                                <li><a href="#about" data-nav="about">O NAMA</a></li>
-                                <li><a href="#projects" data-nav="projects">PROJEKTI</a></li>
-                                <li><a href="#contact" data-nav="contact">KONTAKT</a></li>
+                                <li><a href="#home">POČETNA</a></li>
+                                <li><a href="#about">O NAMA</a></li>
+                                <li><a href="#projects">PROJEKTI</a></li>
+                                <li><a href="#contact">KONTAKT</a></li>
                             </ul>
                             <div class="language-switcher">
                                 <button class="language-btn en-btn" data-lang="en">EN</button>
@@ -207,7 +207,7 @@
                         </div>
                         <div class="contact-text">
                             <h4 data-i18n="contact.email">Email</h4>
-                            <a href="mailto:kratki.metar@gmail.com">kratki.metar@gmail.com</a>
+                            <a href="mailto:kratkimetar.official@gmail.com">kratkimetar.official@gmail.com</a>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -232,7 +232,7 @@
                 </div>
             </div>
 
-            <form class="contact-form" id="contact-form">
+            <form id="contactForm" class="contact-form">
                 <div class="contact-form-header">
                     <h3 data-i18n="contact.form.title">Send us a Message</h3>
                     <p data-i18n="contact.form.subtitle">Fill out the form below and we'll get back to you shortly.</p>
@@ -246,7 +246,15 @@
                     <label for="email" class="form-label" data-i18n="contact.form.email">Your Email</label>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-input" id="message" name="message" placeholder=" " required></textarea>
+                    <textarea 
+                        id="message" 
+                        name="message" 
+                        class="form-input"
+                        maxlength="500" 
+                        minlength="10"
+                        placeholder=" "
+                        required
+                    ></textarea>
                     <label for="message" class="form-label" data-i18n="contact.form.message">Your Message</label>
                 </div>
                 <button type="submit" class="submit-btn" data-i18n="contact.form.submit">Send Message</button>
@@ -267,7 +275,7 @@
             <div class="footer-brand">
                 <img src="assets/logo.png" alt="Kratki Metar">
                 <div class="footer-social">
-                    <a href="mailto:kratki.metar@gmail.com" aria-label="Email">
+                    <a href="mailto:kratkimetar.official@gmail.com" aria-label="Email">
                         <i class="far fa-envelope"></i>
                     </a>
                     <a href="https://instagram.com/kratki.metar_official" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -281,16 +289,21 @@
                 <p><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.contact.address">Address</span></p>
                 <p>Josipa Juraja Strosmayera 12</p>
                 <p>10 0000 Zagreb, Croatia</p>
-                <p><i class="far fa-envelope"></i> <span data-i18n="footer.contact.email">Email</span>: <a href="mailto:kratki.metar@gmail.com">kratki.metar@gmail.com</a></p>
-                <p><i class="fab fa-instagram"></i> <span data-i18n="footer.contact.instagram.title">Social Media</span>: <a href="https://instagram.com/kratki.metar_official" target="_blank" rel="noopener noreferrer" data-i18n="footer.contact.instagram.handle">@kratki.metar_official</a></p>
             </div>
 
             <div class="footer-newsletter">
-                <h3 data-i18n="footer.newsletter.title">Newsletter</h3>
-                <p data-i18n="footer.newsletter.subtitle">Stay updated with our latest projects and news.</p>
-                <form class="newsletter-form" onsubmit="return false;">
-                    <input type="email" data-i18n-placeholder="footer.newsletter.placeholder" aria-label="Email for newsletter">
-                    <button type="submit" data-i18n="footer.newsletter.button">Join</button>
+                <h3 data-i18n="newsletter.title">Newsletter</h3>
+                <p data-i18n="newsletter.description">Budite u toku s našim najnovijim projektima i vijestima</p>
+                <form class="newsletter-form" data-form="newsletter">
+                    <input 
+                        type="email" 
+                        name="email"
+                        required 
+                        data-i18n-placeholder="newsletter.placeholder"
+                        placeholder="Unesite vašu email adresu"
+                    >
+                    <button type="submit" data-i18n="newsletter.button">PRETPLATITE SE</button>
+                    <div class="newsletter-message"></div>
                 </form>
             </div>
         </div>
@@ -304,8 +317,9 @@
     <script src="js/translations.js"></script>
     <script src="js/language-switcher.js"></script>
     <script src="js/navigation.js"></script>
-    <script src="/js/contact-form.js"></script>
-    <script src="script.js"></script>
+    <script src="js/contact-form.js"></script>
     <script src="js/projects.js"></script>
+    <script src="script.js"></script>   
+    <script src="js/main.js"></script>
 </body>
 </html>

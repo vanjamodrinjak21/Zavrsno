@@ -1,7 +1,7 @@
 /* ==========================================================================
    Base styles and variables
    ========================================================================== */
-:root {
+   :root {
     --font-primary: 'Helvetica Neue', Arial, sans-serif;
     --text-color: #ffffff;
     --dark-bg: #000000;
@@ -355,9 +355,9 @@ section {
 /* Language Switcher */
 .language-switcher {
     display: flex;
-    gap: 5px;
+    gap: 8px;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .language-btn {
@@ -366,18 +366,30 @@ section {
     color: rgba(255, 255, 255, 0.5);
     padding: 8px 12px;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
     transition: all 0.3s ease;
-    font-size: 1rem;
-    font-weight: 500;
 }
 
 .language-btn:hover {
-    color: #fff;
+    color: var(--primary-color);
 }
 
 .language-btn.active {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary-color);
+    position: relative;
+}
+
+.language-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background-color: var(--primary-color);
 }
 
 /* Mobile Menu Language Switcher */
@@ -1867,7 +1879,9 @@ html {
     
     .newsletter-form {
         max-width: 300px;
-        margin: 0 auto;
+        margin:0 auto;
+        align-items: center;
+        justify-content: center;
     }
 }
 
@@ -2443,5 +2457,41 @@ textarea:-webkit-autofill:focus {
         padding: 12px 24px;
         font-size: 0.9rem;
         letter-spacing: 1.5px;
+    }
+}
+
+/* Newsletter Message Styles */
+.newsletter-message {
+    margin-top: 10px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.newsletter-message.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.newsletter-message.success {
+    background-color: rgba(46, 204, 113, 0.95);
+    color: white;
+    border-left: 4px solid #27ae60;
+}
+
+.newsletter-message.error {
+    background-color: rgba(231, 76, 60, 0.95);
+    color: white;
+    border-left: 4px solid #c0392b;
+}
+
+@media screen and (max-width: 768px) {
+    .newsletter-message {
+        font-size: 0.85rem;
+        padding: 10px 15px;
     }
 }

@@ -128,6 +128,18 @@ const translations = {
                 message: "Thank you for your message. We'll get back to you soon.",
                 sendAnother: "SEND ANOTHER MESSAGE"
             }
+        },
+        newsletter: {
+            title: "Newsletter",
+            description: "Stay updated with our latest projects and news",
+            placeholder: "Enter your email address",
+            button: "SUBSCRIBE",
+            success: "Thank you for subscribing! Please check your email.",
+            error: {
+                general: "An error occurred. Please try again.",
+                exists: "This email is already subscribed to our newsletter.",
+                invalid: "Invalid email address"
+            }
         }
     },
     hr: {
@@ -258,6 +270,18 @@ const translations = {
                 title: "Poruka Poslana!",
                 message: "Hvala vam na poruci. Javit ćemo vam se uskoro.",
                 sendAnother: "POŠALJI NOVU PORUKU"
+            }
+        },
+        newsletter: {
+            title: "Newsletter",
+            description: "Budite u toku s našim najnovijim projektima i vijestima",
+            placeholder: "Unesite vašu email adresu",
+            button: "PRETPLATITE SE",
+            success: "Hvala na pretplati! Provjerite svoj email.",
+            error: {
+                general: "Došlo je do pogreške. Molimo pokušajte ponovno.",
+                exists: "Ova email adresa je već pretplaćena na newsletter.",
+                invalid: "Nevažeća email adresa"
             }
         }
     }
